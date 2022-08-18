@@ -53,7 +53,12 @@ public class LayoutBuilderImpl implements LayoutBuilder {
     }
 
     @Override
-    public LayoutBuilder addOutput(int index, @Nullable WrappedItemStack startValue) {
+    public LayoutBuilder addOutput(int index, String identifier) {
+        return addOutput(index, identifier, null);
+    }
+    @Override
+    public LayoutBuilder addOutput(int index, String identifier, @Nullable WrappedItemStack startValue) {
+        addSlot(new OutputSlotImpl(index, identifier, startValue, null));
         return this;
     }
 

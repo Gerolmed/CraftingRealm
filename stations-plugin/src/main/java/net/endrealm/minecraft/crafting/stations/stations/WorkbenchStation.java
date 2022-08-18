@@ -28,7 +28,7 @@ public class WorkbenchStation implements CraftingStation {
                 .addInput(28, "6")
                 .addInput(29, "7")
                 .addInput(30, "8")
-                .addOutput(24, null)
+                .addOutput(24, "primary")
                 .build();
     }
 

@@ -10,6 +10,7 @@ public interface LayoutBuilder {
     LayoutBuilder addBlock(int index, @Nullable WrappedItemStack startValue);
     LayoutBuilder addInput(int index, String identifier);
     LayoutBuilder addInput(int index, String identifier, @Nullable WrappedItemStack startValue);
-    LayoutBuilder addOutput(int index, @Nullable WrappedItemStack startValue);
+    LayoutBuilder addOutput(int index, String identifier);
+    LayoutBuilder addOutput(int index, String identifier, @Nullable WrappedItemStack startValue);
     Layout build();
 }
