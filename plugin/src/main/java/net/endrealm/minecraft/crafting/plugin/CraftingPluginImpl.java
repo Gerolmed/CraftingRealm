@@ -17,6 +17,12 @@ import java.util.Map;
 import java.util.Optional;
 
 public class CraftingPluginImpl extends JavaPlugin implements CraftingRealm {
+
+    public static CraftingPluginImpl getInstance() {
+        return instance;
+    }
+
+    private static CraftingPluginImpl instance;
     private final Map<String, CraftingStationFactory> factoryMap = new HashMap<>();
     private final CraftingPlayerManager playerManager = new CraftingPlayerManager();
     @Override
@@ -37,6 +43,8 @@ public class CraftingPluginImpl extends JavaPlugin implements CraftingRealm {
 
     @Override
     public void onEnable() {
+        instance = this;
+
         getCommand("stationopen").setExecutor(new OpenStationCommand(this, playerManager));
         getServer().getPluginManager().registerEvents(new JoinLeaveListener(playerManager), this);
         getServer().getPluginManager().registerEvents(new InventoryListener(playerManager), this);

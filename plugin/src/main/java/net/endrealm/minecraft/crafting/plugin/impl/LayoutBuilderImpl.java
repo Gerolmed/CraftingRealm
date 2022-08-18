@@ -43,7 +43,12 @@ public class LayoutBuilderImpl implements LayoutBuilder {
     }
 
     @Override
-    public LayoutBuilder addInput(int index, @Nullable WrappedItemStack startValue) {
+    public LayoutBuilder addInput(int index, String identifier) {
+        return addInput(index, identifier, null);
+    }
+    @Override
+    public LayoutBuilder addInput(int index, String identifier, @Nullable WrappedItemStack startValue) {
+        addSlot(new InputSlotImpl(index, identifier, startValue, null));
         return this;
     }
 

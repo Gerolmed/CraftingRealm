@@ -3,6 +3,7 @@ package net.endrealm.minecraft.crafting.plugin.impl;
 import net.endrealm.minecraft.crafting.api.station.CraftingStation;
 import net.endrealm.minecraft.crafting.api.inventory.CraftingInventory;
 import net.endrealm.minecraft.crafting.api.station.Layout;
+import net.endrealm.minecraft.crafting.api.station.ReceiveInventory;
 import org.bukkit.Bukkit;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
@@ -25,6 +26,11 @@ public class CraftingInventoryImpl implements CraftingInventory {
 
     private void bind() {
         station.getLayout().getSlots().forEach(layoutSlot -> {
+
+            if(layoutSlot instanceof ReceiveInventory) {
+                ((ReceiveInventory) layoutSlot).setInventory(inventory);
+            }
+
             var stack = layoutSlot.getValue();
             stack.ifPresent(wrappedItemStack -> inventory.setItem(layoutSlot.getIndex(), wrappedItemStack.getItemStack()));
             //TODO: subscribe to change
