@@ -9,7 +9,7 @@ plugins {
 }
 
 dependencies {
-    implementation("com.github.cryptomorin:XSeries:8.7.0")
+    implementation("com.github.cryptomorin:XSeries:9.0.0")
     implementation("de.tr7zw:item-nbt-api:2.10.0")
     implementation("fr.minuskube.inv:smart-invs:1.2.7")
     implementation(project(":api"))
@@ -27,7 +27,13 @@ bukkit {
     load = BukkitPluginDescription.PluginLoadOrder.STARTUP
     main = "net.endrealm.minecraft.crafting.plugin.CraftingPluginImpl"
     apiVersion = "1.19"
-    authors = listOf("Author")
+    authors = listOf("Gerolmed")
+
+    commands {
+        register("stationopen") {
+            description = "Open station"
+        }
+    }
 }
 
 tasks {

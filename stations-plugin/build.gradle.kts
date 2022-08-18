@@ -24,7 +24,7 @@ bukkit {
     load = BukkitPluginDescription.PluginLoadOrder.STARTUP
     main = "net.endrealm.minecraft.crafting.stations.CraftingStationPlugin"
     apiVersion = "1.19"
-    authors = listOf("Author")
+    authors = listOf("Gerolmed")
     depend = listOf("CraftingRealm")
 }
 
