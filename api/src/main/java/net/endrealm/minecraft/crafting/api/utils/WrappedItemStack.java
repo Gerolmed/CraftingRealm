@@ -20,4 +20,17 @@ public class WrappedItemStack {
     public static WrappedItemStack of(Material material) {
         return of(new ItemStack(material));
     }
+
+    /**
+     * Checks if this item is similar to the other and has equal or larger amount
+     * @param value
+     * @return
+     */
+    public boolean moreOrEqual(WrappedItemStack value) {
+        var other = value.getItemStack();
+        if(!other.isSimilar(itemStack)) return false;
+
+
+        return other.getAmount() <= itemStack.getAmount();
+    }
 }

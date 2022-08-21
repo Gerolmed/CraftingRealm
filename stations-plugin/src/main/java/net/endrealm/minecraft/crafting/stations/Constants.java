@@ -7,4 +7,5 @@ import lombok.NoArgsConstructor;
 public final class Constants {
 
     public static final String CRAFTING_TABLE = "CRAFTING_TABLE";
+    public static final String PRIMARY_OUTPUT = "primary";
 }

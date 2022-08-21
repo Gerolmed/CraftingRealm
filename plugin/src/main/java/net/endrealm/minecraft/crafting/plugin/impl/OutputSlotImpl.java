@@ -33,6 +33,24 @@ public class OutputSlotImpl implements OutputSlot, ReceiveInventory {
     }
     @Override
     public void handleClick(InventoryClickEvent event, CraftingStation station) {
-        // TODO: pickup result
+
+        if(!event.isLeftClick()) {
+            event.setCancelled(true);
+            return;
+        }
+
+        var currentHand = event.getCursor();
+        var value = getValue();
+        if(value.isEmpty()) {
+            event.setCancelled(true);
+            return;
+        }
+
+        if(currentHand != null && !value.get().getItemStack().isSimilar(currentHand)) {
+            event.setCancelled(true);
+            return;
+        }
+
+        station.executePickup(index, event.isShiftClick(), event);
     }
 }

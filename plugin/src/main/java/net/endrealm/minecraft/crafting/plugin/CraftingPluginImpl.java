@@ -2,10 +2,12 @@ package net.endrealm.minecraft.crafting.plugin;
 
 import net.endrealm.minecraft.crafting.api.CraftingRealm;
 import net.endrealm.minecraft.crafting.api.inventory.CraftingInventory;
+import net.endrealm.minecraft.crafting.api.recipe.RecipeRegistry;
 import net.endrealm.minecraft.crafting.api.station.CraftingStation;
 import net.endrealm.minecraft.crafting.api.station.CraftingStationFactory;
 import net.endrealm.minecraft.crafting.plugin.commands.OpenStationCommand;
 import net.endrealm.minecraft.crafting.plugin.impl.CraftingInventoryImpl;
+import net.endrealm.minecraft.crafting.plugin.impl.RecipeRegistryImpl;
 import net.endrealm.minecraft.crafting.plugin.listeners.CloseInventoryListener;
 import net.endrealm.minecraft.crafting.plugin.listeners.InventoryListener;
 import net.endrealm.minecraft.crafting.plugin.listeners.JoinLeaveListener;
@@ -25,6 +27,7 @@ public class CraftingPluginImpl extends JavaPlugin implements CraftingRealm {
     private static CraftingPluginImpl instance;
     private final Map<String, CraftingStationFactory> factoryMap = new HashMap<>();
     private final CraftingPlayerManager playerManager = new CraftingPlayerManager();
+    private final RecipeRegistry recipeRegistry = new RecipeRegistryImpl();
     @Override
     public void registerFactory(CraftingStationFactory factory) {
         factoryMap.put(factory.getId(), factory);
@@ -33,6 +36,11 @@ public class CraftingPluginImpl extends JavaPlugin implements CraftingRealm {
     @Override
     public Optional<CraftingStationFactory> getFactory(String id) {
         return Optional.ofNullable(factoryMap.get(id));
+    }
+
+    @Override
+    public RecipeRegistry getRecipeRegistry() {
+        return recipeRegistry;
     }
 
     @Override
