@@ -11,6 +11,7 @@ import net.endrealm.minecraft.crafting.stations.Constants;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.List;
@@ -85,7 +86,15 @@ public class WorkbenchStation implements CraftingStation {
 
     @Override
     public void close() {
-
+        var items = layout.getSlots().stream()
+                .filter(slot -> slot instanceof InputSlot)
+                .map(slot -> (InputSlot) slot)
+                .filter(slot -> slot.getValue().isPresent())
+                .map(slot -> slot.getValue().get().getItemStack())
+                .toList();
+        var player = getPlayer().getBukkit();
+        var leftItems = player.getInventory().addItem(items.toArray(new ItemStack[0]));
+        leftItems.values().forEach(itemStack -> player.getWorld().dropItem(player.getLocation(), itemStack));
     }
 
     @Override

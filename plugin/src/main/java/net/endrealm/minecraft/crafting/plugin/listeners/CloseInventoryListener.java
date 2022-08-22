@@ -18,6 +18,7 @@ public class CloseInventoryListener implements Listener {
     @EventHandler
     public void close(InventoryCloseEvent event) {
         var player = playerManager.get(event.getPlayer().getUniqueId());
+        if(player == null) return;
         if(player.getInventory() == null) return;
         if(!player.getInventory().matches(event.getInventory())) return;
         player.closeInventory();

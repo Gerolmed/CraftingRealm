@@ -35,6 +35,10 @@ public class JoinLeaveListener implements Listener {
         playerManager.add(player.getUniqueId());
     }
     private void leave(Player player) {
+        var craftPlayer = playerManager.get(player.getUniqueId());
+
+        if(craftPlayer != null) craftPlayer.closeInventory();
+
         playerManager.remove(player.getUniqueId());
     }
 }

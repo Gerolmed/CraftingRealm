@@ -3,6 +3,7 @@ package net.endrealm.minecraft.crafting.stations;
 import net.endrealm.minecraft.crafting.api.CraftingRealm;
 import net.endrealm.minecraft.crafting.api.recipe.SimpleRecipe;
 import net.endrealm.minecraft.crafting.api.utils.WrappedItemStack;
+import net.endrealm.minecraft.crafting.stations.listeners.BlockClickListener;
 import net.endrealm.minecraft.crafting.stations.stations.WorkbenchStationFactory;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -23,5 +24,7 @@ public class CraftingStationPlugin extends JavaPlugin {
                 Collections.singletonMap("0", WrappedItemStack.of(new ItemStack(Material.STONE))),
                 Collections.singletonMap(Constants.PRIMARY_OUTPUT, WrappedItemStack.of(new ItemStack(Material.NETHER_BRICK)))
         ));
+
+        getServer().getPluginManager().registerEvents(new BlockClickListener(plugin, this), this);
     }
 }

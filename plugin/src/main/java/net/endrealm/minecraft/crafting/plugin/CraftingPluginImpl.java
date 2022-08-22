@@ -3,20 +3,24 @@ package net.endrealm.minecraft.crafting.plugin;
 import net.endrealm.minecraft.crafting.api.CraftingRealm;
 import net.endrealm.minecraft.crafting.api.inventory.CraftingInventory;
 import net.endrealm.minecraft.crafting.api.recipe.RecipeRegistry;
+import net.endrealm.minecraft.crafting.api.source.CraftingSource;
 import net.endrealm.minecraft.crafting.api.station.CraftingStation;
 import net.endrealm.minecraft.crafting.api.station.CraftingStationFactory;
 import net.endrealm.minecraft.crafting.plugin.commands.OpenStationCommand;
 import net.endrealm.minecraft.crafting.plugin.impl.CraftingInventoryImpl;
+import net.endrealm.minecraft.crafting.plugin.impl.LayoutBuilderImpl;
 import net.endrealm.minecraft.crafting.plugin.impl.RecipeRegistryImpl;
 import net.endrealm.minecraft.crafting.plugin.listeners.CloseInventoryListener;
 import net.endrealm.minecraft.crafting.plugin.listeners.InventoryListener;
 import net.endrealm.minecraft.crafting.plugin.listeners.JoinLeaveListener;
 import net.endrealm.minecraft.crafting.plugin.player.CraftingPlayerManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.UUID;
 
 public class CraftingPluginImpl extends JavaPlugin implements CraftingRealm {
 
@@ -46,6 +50,12 @@ public class CraftingPluginImpl extends JavaPlugin implements CraftingRealm {
     @Override
     public CraftingInventory createAndBindInventory(CraftingStation craftingStation) {
         return new CraftingInventoryImpl(craftingStation);
+    }
+
+    @Override
+    public void openFactory(String stationId, UUID playerId, @Nullable CraftingSource source) {
+        var craftingStation = getFactory(stationId).get().produce(playerManager.get(playerId), null, new LayoutBuilderImpl());
+        this.createAndBindInventory(craftingStation);
     }
 
 
