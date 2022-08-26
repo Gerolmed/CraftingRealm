@@ -10,6 +10,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * Utility class for matching shaped recipes on configurable grid. All recipes must fit into the grid!
+ */
 public class GridRecipeMatcher {
     private final List<String> supportedTables;
     private final List<InputSlot> slotList;

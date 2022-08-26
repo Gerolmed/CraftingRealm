@@ -9,4 +9,6 @@ public interface CraftingInventory {
     void close();
 
     void onClick(InventoryClickEvent event);
+
+    void update();
 }

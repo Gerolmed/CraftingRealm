@@ -53,4 +53,9 @@ public class CraftingInventoryImpl implements CraftingInventory {
         if(slot == null) return;
         slot.handleClick(event, station);
     }
+
+    @Override
+    public void update() {
+        station.handleUpdate(-1);
+    }
 }

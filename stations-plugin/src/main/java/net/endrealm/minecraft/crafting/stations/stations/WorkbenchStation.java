@@ -55,7 +55,7 @@ public class WorkbenchStation implements CraftingStation {
 
     @Override
     public void handleUpdate(int index) {
-        if(layout.getSlot(index) instanceof InputSlot) {
+        if(index == -1 || layout.getSlot(index) instanceof InputSlot) {
             calculateOutput();
         }
     }

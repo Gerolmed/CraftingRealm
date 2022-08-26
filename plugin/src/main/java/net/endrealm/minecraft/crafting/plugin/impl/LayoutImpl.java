@@ -5,7 +5,6 @@ import net.endrealm.minecraft.crafting.api.station.Layout;
 import net.endrealm.minecraft.crafting.api.station.LayoutSlot;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 
 @Data

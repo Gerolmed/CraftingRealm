@@ -65,7 +65,7 @@ public class CraftingPluginImpl extends JavaPlugin implements CraftingRealm {
 
         getCommand("stationopen").setExecutor(new OpenStationCommand(this, playerManager));
         getServer().getPluginManager().registerEvents(new JoinLeaveListener(playerManager), this);
-        getServer().getPluginManager().registerEvents(new InventoryListener(playerManager), this);
+        getServer().getPluginManager().registerEvents(new InventoryListener(playerManager, this), this);
         getServer().getPluginManager().registerEvents(new CloseInventoryListener(playerManager), this);
     }
 }
