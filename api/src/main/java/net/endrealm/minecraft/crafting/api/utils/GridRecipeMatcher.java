@@ -28,7 +28,10 @@ public class GridRecipeMatcher {
     }
 
     public Optional<Recipe> detect() {
-        var inputMap = optimizedInputs();
+        var inputMap = optimizedInputs(
+                value -> value.getValue().orElse(null),
+                (x, y) -> new WrappedItemStack[x][y]
+        );
         var result = supportedTables.stream().flatMap(id -> recipeRegistry.getRecipes(id).stream()).iterator();
         while (result.hasNext()) {
             var recipe = result.next();
@@ -38,17 +41,17 @@ public class GridRecipeMatcher {
         return Optional.empty();
     }
 
-    private Map<String, WrappedItemStack> optimizedInputs() {
-        var shape = new WrappedItemStack[context.getHeight()][context.getWidth()];
+    private <T> Map<String, T> optimizedInputs(ValueMapper<InputSlot, T> mapper, MatrixSupplier<T> supplier) {
+        var shape = supplier.get(context.getHeight(), context.getWidth());
         for (int y = 0; y < shape.length; y++) {
             for (int x = 0; x < shape[y].length; x++) {
-                shape[y][x] = slotList.get(y * context.getWidth() + x).getValue().orElse(null);
+                shape[y][x] = mapper.get(slotList.get(y * context.getWidth() + x));
             }
         }
 
-        shape = cutMinimal(shape);
+        shape = MatrixUtils.cutMinimal(shape, supplier);
 
-        var finalShape = new HashMap<String, WrappedItemStack>();
+        var finalShape = new HashMap<String, T>();
 
         for (int y = 0; y < shape.length; y++) {
             for (int x = 0; x < shape[y].length; x++) {
@@ -60,61 +63,6 @@ public class GridRecipeMatcher {
         return finalShape;
     }
 
-    private WrappedItemStack[][] cutMinimal(WrappedItemStack[][] shape) {
-
-        boolean preCheck = true;
-        int preRowCount = 0;
-        int postRowCount = 0;
-
-        // Check for empty rows
-        for (int y = 0; y < shape.length; y++) {
-            var empties = 0;
-            for (int x = 0; x < shape[y].length; x++) {
-                var stack = shape[y][x];
-                if(stack != null) break;
-                empties++;
-            }
-            if(empties != shape[y].length) {
-                postRowCount = 0;
-                preCheck = false;
-            } else {
-                if(preCheck) preRowCount++;
-                postRowCount++;
-            }
-        }
-
-        // grid empty
-        if(preRowCount + postRowCount >= shape.length) return new WrappedItemStack[0][];
-        preCheck = true;
-        int preColCount = 0;
-        int postColCount = 0;
-
-        for (int x = 0; x < shape[0].length; x++) {
-            var empties = 0;
-            for (int y = 0; y < shape.length; y++) {
-                var stack = shape[y][x];
-                if(stack != null) break;
-                empties++;
-            }
-            if(empties != shape.length) {
-                postColCount = 0;
-                preCheck = false;
-            } else {
-                if(preCheck) preColCount++;
-                postColCount++;
-            }
-        }
-
-        // Build new shape
-        var outShape = new WrappedItemStack[shape.length-preRowCount-postRowCount][shape[0].length-preColCount-postColCount];
-
-        for (int y = 0; y < outShape.length; y++) {
-            System.arraycopy(shape[y + preRowCount], preColCount, outShape[y], 0, outShape[y].length);
-        }
-
-        return outShape;
-    }
-
     private boolean match(Recipe recipe, Map<String, WrappedItemStack> inputMap) {
         var shape = recipe.getShape(slotList, context);
         if(!shape.keySet().equals(inputMap.keySet())) return false;
@@ -122,5 +70,27 @@ public class GridRecipeMatcher {
             if(!inputMap.get(entry.getKey()).moreOrEqual(entry.getValue())) return false;
         }
         return true;
+    }
+
+    public void deductCosts(Recipe recipe) {
+        var inputMap = optimizedInputs(
+                value -> value,
+                (x, y) -> new InputSlot[x][y]
+        );
+
+        var shape = recipe.getShape(slotList, context);
+        for (var entry : shape.entrySet()) {
+            var ingredient = entry.getValue();
+            var input = inputMap.get(entry.getKey());
+
+            // Should never be null as "match" ran before
+            var inputValue = input.getValue().orElseThrow();
+            var newAmount = inputValue.getItemStack().getAmount() - ingredient.getItemStack().getAmount();
+            if(newAmount > 0) {
+                inputValue.getItemStack().setAmount(newAmount);
+            } else {
+                input.setValue(null);
+            }
+        }
     }
 }

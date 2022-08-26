@@ -6,6 +6,8 @@ import net.endrealm.minecraft.crafting.api.station.CraftingStation;
 import net.endrealm.minecraft.crafting.api.station.OutputSlot;
 import net.endrealm.minecraft.crafting.api.station.ReceiveInventory;
 import net.endrealm.minecraft.crafting.api.utils.WrappedItemStack;
+import org.bukkit.Material;
+import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 
@@ -39,14 +41,16 @@ public class OutputSlotImpl implements OutputSlot, ReceiveInventory {
             return;
         }
 
-        var currentHand = event.getCursor();
-        var value = getValue();
-        if(value.isEmpty()) {
+        if(event.getAction() != InventoryAction.PICKUP_ALL &&
+                event.getAction() != InventoryAction.MOVE_TO_OTHER_INVENTORY &&
+                event.getAction() != InventoryAction.PLACE_ALL &&
+                event.getAction() != InventoryAction.PLACE_ONE) {
             event.setCancelled(true);
             return;
         }
 
-        if(currentHand != null && !value.get().getItemStack().isSimilar(currentHand)) {
+        var value = getValue();
+        if(value.isEmpty()) {
             event.setCancelled(true);
             return;
         }

@@ -29,8 +29,6 @@ public class WrappedItemStack {
     public boolean moreOrEqual(WrappedItemStack value) {
         var other = value.getItemStack();
         if(!other.isSimilar(itemStack)) return false;
-
-
         return other.getAmount() <= itemStack.getAmount();
     }
 }

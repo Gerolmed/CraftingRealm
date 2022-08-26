@@ -25,6 +25,7 @@ public class WorkbenchStation implements CraftingStation {
     private final CraftingPlayer craftingPlayer;
     private final JavaPlugin plugin;
     private final GridRecipeMatcher matcher;
+    private Recipe recipe;
 
     public WorkbenchStation(LayoutBuilder builder, CraftingPlayer craftingPlayer, RecipeRegistry recipeRegistry, JavaPlugin plugin) {
         this.craftingPlayer = craftingPlayer;
@@ -65,10 +66,12 @@ public class WorkbenchStation implements CraftingStation {
     }
 
     private void clearOutput() {
+        this.recipe = null;
         getOutputs().forEach(outputSlot -> outputSlot.setValue(null));
     }
 
     private void assignOutput(Recipe recipe) {
+        this.recipe = recipe;
         var outputs = recipe.produceOutputs(this, getPlayer());
         getOutputs().forEach(outputSlot -> outputSlot.setValue(outputs.get(outputSlot.getIdentifier())));
     }
@@ -104,8 +107,38 @@ public class WorkbenchStation implements CraftingStation {
             // TODO support shift click
             return;
         }
+        var currentHand = event.getCursor();
+        var value = getLayout().getSlot(index).getValue();
 
-        // TODO: deduct items
+        if(value.isEmpty()) {
+            event.setCancelled(true);
+            return;
+        }
+
+        var outValue = value.get();
+
+        assert currentHand != null;
+
+        if(currentHand.getType() != Material.AIR && !outValue.getItemStack().isSimilar(currentHand)) {
+            event.setCancelled(true);
+            return;
+        }
+        var currentHandAmount = currentHand.getAmount();
+        var newAmount = currentHandAmount + outValue.getItemStack().getAmount();
+        if(newAmount > outValue.getItemStack().getMaxStackSize()) return;
+
+        if(currentHand.getType() != Material.AIR) {
+            currentHand.setAmount(newAmount);
+        } else {
+            event.setCancelled(false);
+        }
+
+        deductCosts();
+
         Bukkit.getScheduler().runTask(plugin, this::calculateOutput);
+    }
+
+    private void deductCosts() {
+        matcher.deductCosts(recipe);
     }
 }
