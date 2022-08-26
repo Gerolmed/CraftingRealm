@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Utility class for matching shaped recipes on configurable grid. All recipes must fit into the grid!
@@ -32,10 +33,11 @@ public class GridRecipeMatcher {
                 value -> value.getValue().orElse(null),
                 (x, y) -> new WrappedItemStack[x][y]
         );
+        var rawInputMap = slotList.stream().filter(slot -> slot.getValue().isPresent()).collect(Collectors.toMap(InputSlot::getIdentifier, slot -> slot.getValue().get()));
         var result = supportedTables.stream().flatMap(id -> recipeRegistry.getRecipes(id).stream()).iterator();
         while (result.hasNext()) {
             var recipe = result.next();
-            if(match(recipe, inputMap)) return Optional.of(recipe);
+            if(match(recipe, inputMap, rawInputMap)) return Optional.of(recipe);
         }
 
         return Optional.empty();
@@ -63,11 +65,19 @@ public class GridRecipeMatcher {
         return finalShape;
     }
 
-    private boolean match(Recipe recipe, Map<String, WrappedItemStack> inputMap) {
+    private boolean match(Recipe recipe, Map<String, WrappedItemStack> inputMap, Map<String, WrappedItemStack> rawInputMap) {
         var shape = recipe.getShape(slotList, context);
-        if(!shape.keySet().equals(inputMap.keySet())) return false;
+        if(!recipe.isShapeless()) {
+            if(!shape.keySet().equals(inputMap.keySet())) return false;
+            for (var entry : shape.entrySet()) {
+                if(!inputMap.get(entry.getKey()).moreOrEqual(entry.getValue())) return false;
+            }
+            return true;
+        }
+
+        if(!shape.keySet().equals(rawInputMap.keySet())) return false;
         for (var entry : shape.entrySet()) {
-            if(!inputMap.get(entry.getKey()).moreOrEqual(entry.getValue())) return false;
+            if(!rawInputMap.get(entry.getKey()).moreOrEqual(entry.getValue())) return false;
         }
         return true;
     }

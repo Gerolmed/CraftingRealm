@@ -6,4 +6,9 @@ import lombok.Data;
 public class GridLayoutContext implements LayoutContext{
     private final int width;
     private final int height;
+
+    @Override
+    public int getInputCount() {
+        return width * height;
+    }
 }

@@ -31,4 +31,8 @@ public class WrappedItemStack {
         if(!other.isSimilar(itemStack)) return false;
         return other.getAmount() <= itemStack.getAmount();
     }
+
+    public boolean isSimilar(WrappedItemStack wrappedItemStack) {
+        return getItemStack().isSimilar(wrappedItemStack.getItemStack());
+    }
 }

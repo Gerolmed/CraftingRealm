@@ -43,4 +43,9 @@ public class SimpleGridRecipe implements Recipe {
     public boolean supports(LayoutContext context) {
         return context instanceof GridLayoutContext grid && grid.getHeight() >= shape.length && grid.getWidth() >= shape[0].length;
     }
+
+    @Override
+    public boolean isShapeless() {
+        return false;
+    }
 }

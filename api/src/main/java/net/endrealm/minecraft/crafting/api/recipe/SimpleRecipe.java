@@ -31,4 +31,9 @@ public class SimpleRecipe implements Recipe {
     public boolean supports(LayoutContext context) {
         return true;
     }
+
+    @Override
+    public boolean isShapeless() {
+        return false;
+    }
 }
