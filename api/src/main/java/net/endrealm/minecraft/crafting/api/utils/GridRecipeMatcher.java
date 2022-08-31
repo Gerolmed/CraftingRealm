@@ -70,14 +70,14 @@ public class GridRecipeMatcher {
         if(!recipe.isShapeless()) {
             if(!shape.keySet().equals(inputMap.keySet())) return false;
             for (var entry : shape.entrySet()) {
-                if(!inputMap.get(entry.getKey()).moreOrEqual(entry.getValue())) return false;
+                if(!entry.getValue().moreOrEqual(inputMap.get(entry.getKey()))) return false;
             }
             return true;
         }
 
         if(!shape.keySet().equals(rawInputMap.keySet())) return false;
         for (var entry : shape.entrySet()) {
-            if(!rawInputMap.get(entry.getKey()).moreOrEqual(entry.getValue())) return false;
+            if(!entry.getValue().moreOrEqual(rawInputMap.get(entry.getKey()))) return false;
         }
         return true;
     }
@@ -95,7 +95,7 @@ public class GridRecipeMatcher {
 
             // Should never be null as "match" ran before
             var inputValue = input.getValue().orElseThrow();
-            var newAmount = inputValue.getItemStack().getAmount() - ingredient.getItemStack().getAmount();
+            var newAmount = inputValue.getItemStack().getAmount() - ingredient.getAmount();
             if(newAmount > 0) {
                 inputValue.getItemStack().setAmount(newAmount);
             } else {

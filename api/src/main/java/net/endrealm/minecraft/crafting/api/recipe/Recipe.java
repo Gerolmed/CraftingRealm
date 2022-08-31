@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface Recipe {
-    Map<String, WrappedItemStack> getShape(List<InputSlot> slots, LayoutContext context);
+    Map<String, Ingredient> getShape(List<InputSlot> slots, LayoutContext context);
     Map<String, WrappedItemStack> produceOutputs(CraftingStation station, CraftingPlayer player);
     boolean supports(LayoutContext context);
 

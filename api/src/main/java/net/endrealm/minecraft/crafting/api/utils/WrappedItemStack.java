@@ -1,9 +1,10 @@
 package net.endrealm.minecraft.crafting.api.utils;
 
+import net.endrealm.minecraft.crafting.api.recipe.Ingredient;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-public class WrappedItemStack {
+public class WrappedItemStack implements Ingredient {
     private final ItemStack itemStack;
 
     private WrappedItemStack(ItemStack itemStack) {
@@ -21,18 +22,19 @@ public class WrappedItemStack {
         return of(new ItemStack(material));
     }
 
-    /**
-     * Checks if this item is similar to the other and has equal or larger amount
-     * @param value
-     * @return
-     */
+
     public boolean moreOrEqual(WrappedItemStack value) {
+        if(!isSimilar(value)) return false;
         var other = value.getItemStack();
-        if(!other.isSimilar(itemStack)) return false;
         return other.getAmount() <= itemStack.getAmount();
     }
 
     public boolean isSimilar(WrappedItemStack wrappedItemStack) {
         return getItemStack().isSimilar(wrappedItemStack.getItemStack());
+    }
+
+    @Override
+    public int getAmount() {
+        return itemStack.getAmount();
     }
 }
