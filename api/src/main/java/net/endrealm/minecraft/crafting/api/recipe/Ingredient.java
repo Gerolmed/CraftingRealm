@@ -4,7 +4,7 @@ import net.endrealm.minecraft.crafting.api.utils.WrappedItemStack;
 
 public interface Ingredient {
     /**
-     * Checks if this item is similar to the other and has equal or larger amount
+     * Checks if this item is similar to the other and if the other is larger or equal amount
      * @param value
      * @return
      */

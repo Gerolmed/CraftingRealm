@@ -16,7 +16,7 @@ public class VariationIngredient implements Ingredient {
             if(stack.isSimilar(value)) match = true;
         }
 
-        return match && value.getAmount() <= getAmount();
+        return match && value.getAmount() >= getAmount();
     }
 
     @Override

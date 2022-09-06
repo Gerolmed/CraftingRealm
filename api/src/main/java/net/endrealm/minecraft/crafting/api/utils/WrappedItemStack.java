@@ -25,8 +25,7 @@ public class WrappedItemStack implements Ingredient {
 
     public boolean moreOrEqual(WrappedItemStack value) {
         if(!isSimilar(value)) return false;
-        var other = value.getItemStack();
-        return other.getAmount() <= itemStack.getAmount();
+        return value.getAmount() >= itemStack.getAmount();
     }
 
     public boolean isSimilar(WrappedItemStack wrappedItemStack) {
