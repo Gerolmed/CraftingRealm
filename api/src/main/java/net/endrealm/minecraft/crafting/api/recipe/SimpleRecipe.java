@@ -14,11 +14,11 @@ import java.util.Map;
 public class SimpleRecipe implements Recipe {
 
     private final String stationId;
-    private final Map<String, WrappedItemStack> shape;
+    private final Map<String, Ingredient> shape;
     private final Map<String, WrappedItemStack> outputs;
 
     @Override
-    public Map<String, WrappedItemStack> getShape(List<InputSlot> slots, LayoutContext context) {
+    public Map<String, Ingredient> getShape(List<InputSlot> slots, LayoutContext context) {
         return shape;
     }
 

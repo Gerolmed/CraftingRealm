@@ -9,9 +9,9 @@ docs tba
 ## Roadmap v1
 
 - [x] Add recipe and station interaction handling
-- [ ] Common functionality
+- [x] Common functionality
     - [x] Recipe registry
-    - [ ] Ingredient variation support
+    - [x] Ingredient variation support
 - [x] Crafting Table Replacement functionality
   - [x] Basic grid recipe matching
   - [x] Output retrieval and item deduction
@@ -20,5 +20,8 @@ docs tba
   - [ ] processing time recipes
   - [ ] fuel mechanism
   - [ ] persistent station data
+
+## Roadmap v2
+- [ ] improved variations (type dict)
 ## Run local dev server
  - `shadowJar runServer`

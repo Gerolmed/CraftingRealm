@@ -16,13 +16,13 @@ import java.util.Map;
 public class SimpleGridRecipe implements Recipe {
 
     private final String stationId;
-    private final WrappedItemStack[][] shape;
+    private final Ingredient[][] shape;
     private final Map<String, WrappedItemStack> outputs;
 
     @Override
-    public Map<String, WrappedItemStack> getShape(List<InputSlot> slots, LayoutContext context) {
+    public Map<String, Ingredient> getShape(List<InputSlot> slots, LayoutContext context) {
         if(!(context instanceof GridLayoutContext gridContext)) return null;
-        var finalShape = new HashMap<String, WrappedItemStack>();
+        var finalShape = new HashMap<String, Ingredient>();
         for (int y = 0; y < shape.length; y++) {
             for (int x = 0; x < shape[y].length; x++) {
                 var stack = shape[y][x];

@@ -15,19 +15,19 @@ import java.util.stream.Collectors;
 public class SimpleShapelessRecipe implements Recipe {
 
     private final String stationId;
-    private final WrappedItemStack[] items;
+    private final Ingredient[] items;
     private final Map<String, WrappedItemStack> outputs;
 
     @Override
-    public Map<String, WrappedItemStack> getShape(List<InputSlot> slots, LayoutContext context) {
+    public Map<String, Ingredient> getShape(List<InputSlot> slots, LayoutContext context) {
 
         var sortedSlots = slots.stream()
                 .sorted(Comparator.comparingInt(o -> -o.getValue().map(wrappedItemStack -> wrappedItemStack.getItemStack().getAmount()).orElse(0)))
                 .collect(Collectors.toCollection(ArrayList::new));
-        var outputs = new HashMap<String, WrappedItemStack>();
-        var leftovers = new ArrayList<WrappedItemStack>();
+        var outputs = new HashMap<String, Ingredient>();
+        var leftovers = new ArrayList<Ingredient>();
         Arrays.stream(items)
-                .sorted(Comparator.comparingInt(o -> -o.getItemStack().getAmount()))
+                .sorted(Comparator.comparingInt(o -> -o.getAmount()))
                 .forEach(wrappedItemStack -> {
                     for (int i = 0; i < sortedSlots.size(); i++) {
                         var slot = sortedSlots.get(i);
@@ -41,7 +41,7 @@ public class SimpleShapelessRecipe implements Recipe {
                         }
                         var otherItem = value.get();
 
-                        if(!otherItem.isSimilar(wrappedItemStack)) continue;
+                        if(!wrappedItemStack.isSimilar(otherItem)) continue;
 
                         outputs.put(slot.getIdentifier(), wrappedItemStack);
                         sortedSlots.remove(i);

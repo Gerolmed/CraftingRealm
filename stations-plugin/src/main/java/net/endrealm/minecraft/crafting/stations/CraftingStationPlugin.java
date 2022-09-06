@@ -1,9 +1,7 @@
 package net.endrealm.minecraft.crafting.stations;
 
 import net.endrealm.minecraft.crafting.api.CraftingRealm;
-import net.endrealm.minecraft.crafting.api.recipe.SimpleGridRecipe;
-import net.endrealm.minecraft.crafting.api.recipe.SimpleRecipe;
-import net.endrealm.minecraft.crafting.api.recipe.SimpleShapelessRecipe;
+import net.endrealm.minecraft.crafting.api.recipe.*;
 import net.endrealm.minecraft.crafting.api.utils.MatrixUtils;
 import net.endrealm.minecraft.crafting.api.utils.WrappedItemStack;
 import net.endrealm.minecraft.crafting.stations.listeners.BlockClickListener;
@@ -47,6 +45,20 @@ public class CraftingStationPlugin extends JavaPlugin {
                         new WrappedItemStack[]{
                                 WrappedItemStack.of(new ItemStack(Material.CHARCOAL)),
                                 WrappedItemStack.of(new ItemStack(Material.FLINT))
+                        },
+                        Collections.singletonMap(Constants.PRIMARY_OUTPUT, WrappedItemStack.of(new ItemStack(Material.COAL_BLOCK)))
+                ),
+                new SimpleShapelessRecipe(
+                        Constants.CRAFTING_TABLE,
+                        new Ingredient[]{
+                                new VariationIngredient(new WrappedItemStack[]{
+                                        WrappedItemStack.of(new ItemStack(Material.CHARCOAL)),
+                                        WrappedItemStack.of(new ItemStack(Material.COAL)),
+                                }, 1),
+                                new VariationIngredient(new WrappedItemStack[]{
+                                        WrappedItemStack.of(new ItemStack(Material.CHARCOAL)),
+                                        WrappedItemStack.of(new ItemStack(Material.COAL))
+                                }, 1)
                         },
                         Collections.singletonMap(Constants.PRIMARY_OUTPUT, WrappedItemStack.of(new ItemStack(Material.COAL_BLOCK)))
                 )
