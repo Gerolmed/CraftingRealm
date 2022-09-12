@@ -3,6 +3,7 @@ package net.endrealm.minecraft.crafting.plugin;
 import net.endrealm.minecraft.crafting.api.CraftingPlayer;
 import net.endrealm.minecraft.crafting.api.CraftingRealm;
 import net.endrealm.minecraft.crafting.api.inventory.CraftingInventory;
+import net.endrealm.minecraft.crafting.api.recipe.Recipe;
 import net.endrealm.minecraft.crafting.api.recipe.RecipeRegistry;
 import net.endrealm.minecraft.crafting.api.source.CraftingSource;
 import net.endrealm.minecraft.crafting.api.station.CraftingStation;
@@ -58,6 +59,11 @@ public class CraftingPluginImpl extends JavaPlugin implements CraftingRealm {
         var player = playerManager.get(playerId);
         var craftingStation = getFactory(stationId).get().produce(player, null, new LayoutBuilderImpl());
         this.createAndBindInventory(craftingStation, player);
+    }
+
+    @Override
+    public Optional<CraftingStationFactory> getFactoryByRecipe(Recipe recipe) {
+        return getFactory(recipe.getStationId());
     }
 
 

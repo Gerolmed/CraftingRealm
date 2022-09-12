@@ -1,6 +1,7 @@
 package net.endrealm.minecraft.crafting.api;
 
 import net.endrealm.minecraft.crafting.api.inventory.CraftingInventory;
+import net.endrealm.minecraft.crafting.api.recipe.Recipe;
 import net.endrealm.minecraft.crafting.api.recipe.RecipeRegistry;
 import net.endrealm.minecraft.crafting.api.source.CraftingSource;
 import net.endrealm.minecraft.crafting.api.station.CraftingStation;
@@ -18,4 +19,7 @@ public interface CraftingRealm {
     CraftingInventory createAndBindInventory(CraftingStation craftingStation, CraftingPlayer player);
 
     void openFactory(String stationId, UUID playerId, @Nullable CraftingSource source);
+
+    Optional<CraftingStationFactory> getFactoryByRecipe(Recipe recipe);
+
 }

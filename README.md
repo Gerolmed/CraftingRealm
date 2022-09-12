@@ -16,12 +16,16 @@ docs tba
   - [x] Basic grid recipe matching
   - [x] Output retrieval and item deduction
   - [x] vanilla recipe loading
+- [ ] Recipe book
+  - [ ] recipe overview (only show outputs)
+  - [ ] cycle alternatives
+  - [ ] cycle types
+
+## Roadmap v2
+- [ ] improved variations (type dict)
 - [ ] Furnace Replacement functionality
   - [ ] processing time recipes
   - [ ] fuel mechanism
   - [ ] persistent station data
-
-## Roadmap v2
-- [ ] improved variations (type dict)
 ## Run local dev server
  - `shadowJar runServer`
