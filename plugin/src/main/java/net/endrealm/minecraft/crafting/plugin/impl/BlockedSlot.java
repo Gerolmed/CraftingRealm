@@ -2,6 +2,7 @@ package net.endrealm.minecraft.crafting.plugin.impl;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import net.endrealm.minecraft.crafting.api.inventory.InventorySource;
 import net.endrealm.minecraft.crafting.api.station.CraftingStation;
 import net.endrealm.minecraft.crafting.api.station.LayoutSlot;
 import net.endrealm.minecraft.crafting.api.utils.WrappedItemStack;
@@ -29,7 +30,7 @@ public class BlockedSlot implements LayoutSlot {
     }
 
     @Override
-    public void handleClick(InventoryClickEvent event, CraftingStation station) {
+    public void handleClick(InventoryClickEvent event, InventorySource station) {
         event.setCancelled(true);
     }
 }

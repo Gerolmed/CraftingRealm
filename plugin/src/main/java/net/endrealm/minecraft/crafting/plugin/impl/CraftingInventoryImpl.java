@@ -1,5 +1,7 @@
 package net.endrealm.minecraft.crafting.plugin.impl;
 
+import net.endrealm.minecraft.crafting.api.CraftingPlayer;
+import net.endrealm.minecraft.crafting.api.inventory.InventorySource;
 import net.endrealm.minecraft.crafting.api.station.CraftingStation;
 import net.endrealm.minecraft.crafting.api.inventory.CraftingInventory;
 import net.endrealm.minecraft.crafting.api.station.Layout;
@@ -10,18 +12,18 @@ import org.bukkit.inventory.Inventory;
 
 public class CraftingInventoryImpl implements CraftingInventory {
     private final Inventory inventory;
-    private final CraftingStation station;
+    private final InventorySource station;
     private final Layout layout;
 
-    public CraftingInventoryImpl(CraftingStation station) {
+    public CraftingInventoryImpl(InventorySource station, CraftingPlayer player) {
         this.station = station;
         layout = station.getLayout();
         inventory = Bukkit.createInventory(null, 9 * layout.getRows(), "TEEEEEEEEEST");
 
         bind();
 
-        station.getPlayer().setInventory(this);
-        station.getPlayer().getBukkit().openInventory(inventory);
+        player.setInventory(this);
+        player.getBukkit().openInventory(inventory);
     }
 
     private void bind() {

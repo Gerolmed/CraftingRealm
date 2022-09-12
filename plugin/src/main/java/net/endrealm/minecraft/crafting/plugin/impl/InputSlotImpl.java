@@ -2,6 +2,7 @@ package net.endrealm.minecraft.crafting.plugin.impl;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import net.endrealm.minecraft.crafting.api.inventory.InventorySource;
 import net.endrealm.minecraft.crafting.api.station.CraftingStation;
 import net.endrealm.minecraft.crafting.api.station.InputSlot;
 import net.endrealm.minecraft.crafting.api.station.ReceiveInventory;
@@ -34,7 +35,7 @@ public class InputSlotImpl implements InputSlot, ReceiveInventory {
         return Optional.ofNullable(inventory.getItem(index)).map(WrappedItemStack::of);
     }
     @Override
-    public void handleClick(InventoryClickEvent event, CraftingStation station) {
+    public void handleClick(InventoryClickEvent event, InventorySource station) {
         // delay so inventory update has been executed
         Bukkit.getScheduler().runTask(CraftingPluginImpl.getInstance(), () -> station.handleUpdate(index));
     }

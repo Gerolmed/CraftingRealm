@@ -15,7 +15,7 @@ public interface CraftingRealm {
     Optional<CraftingStationFactory> getFactory(String id);
     RecipeRegistry getRecipeRegistry();
 
-    CraftingInventory createAndBindInventory(CraftingStation craftingStation);
+    CraftingInventory createAndBindInventory(CraftingStation craftingStation, CraftingPlayer player);
 
     void openFactory(String stationId, UUID playerId, @Nullable CraftingSource source);
 }

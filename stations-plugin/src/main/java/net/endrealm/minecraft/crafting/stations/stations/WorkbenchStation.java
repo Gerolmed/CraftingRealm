@@ -82,7 +82,6 @@ public class WorkbenchStation implements CraftingStation {
                 .map(layoutSlot -> (OutputSlot) layoutSlot);
     }
 
-    @Override
     public CraftingPlayer getPlayer() {
         return craftingPlayer;
     }

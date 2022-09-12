@@ -1,5 +1,6 @@
 package net.endrealm.minecraft.crafting.api.station;
 
+import net.endrealm.minecraft.crafting.api.inventory.InventorySource;
 import net.endrealm.minecraft.crafting.api.utils.WrappedItemStack;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.jetbrains.annotations.Nullable;
@@ -11,5 +12,5 @@ public interface LayoutSlot {
     void setValue(@Nullable WrappedItemStack stack);
 
     int getIndex();
-    void handleClick(InventoryClickEvent event, CraftingStation station);
+    void handleClick(InventoryClickEvent event, InventorySource station);
 }

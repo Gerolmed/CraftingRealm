@@ -28,8 +28,10 @@ public class OpenStationCommand implements CommandExecutor {
             return false;
         }
 
-        var craftingStation = factory.get().produce(playerManager.get(player.getUniqueId()), null, new LayoutBuilderImpl());
-        realm.createAndBindInventory(craftingStation);
+        var craftingPlayer = playerManager.get(player.getUniqueId());
+
+        var craftingStation = factory.get().produce(craftingPlayer, null, new LayoutBuilderImpl());
+        realm.createAndBindInventory(craftingStation, craftingPlayer);
         return true;
     }
 }
