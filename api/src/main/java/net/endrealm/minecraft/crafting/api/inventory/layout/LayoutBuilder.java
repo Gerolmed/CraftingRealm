@@ -9,6 +9,7 @@ public interface LayoutBuilder {
     LayoutBuilder addSlot(LayoutSlot slot);
     LayoutBuilder fillBlock( @Nullable WrappedItemStack startValue);
     LayoutBuilder addBlock(int index, @Nullable WrappedItemStack startValue);
+    LayoutBuilder addButton(int index, WrappedItemStack startValue, Runnable onClick);
     LayoutBuilder addInput(int index, String identifier);
     LayoutBuilder addInput(int index, String identifier, @Nullable WrappedItemStack startValue);
     LayoutBuilder addOutput(int index, String identifier);

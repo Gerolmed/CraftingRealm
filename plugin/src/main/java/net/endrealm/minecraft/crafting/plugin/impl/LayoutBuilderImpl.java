@@ -38,8 +38,12 @@ public class LayoutBuilderImpl implements LayoutBuilder {
 
     @Override
     public LayoutBuilder addBlock(int index, @Nullable WrappedItemStack startValue) {
-        addSlot(new BlockedSlot(index, startValue));
-        return this;
+        return addSlot(new BlockedSlot(index, startValue));
+    }
+
+    @Override
+    public LayoutBuilder addButton(int index, WrappedItemStack startValue, Runnable onClick) {
+        return addSlot(new ButtonSlot(index, startValue, onClick));
     }
 
     @Override
@@ -48,8 +52,7 @@ public class LayoutBuilderImpl implements LayoutBuilder {
     }
     @Override
     public LayoutBuilder addInput(int index, String identifier, @Nullable WrappedItemStack startValue) {
-        addSlot(new InputSlotImpl(index, identifier, startValue, null));
-        return this;
+        return addSlot(new InputSlotImpl(index, identifier, startValue, null));
     }
 
     @Override
@@ -58,8 +61,7 @@ public class LayoutBuilderImpl implements LayoutBuilder {
     }
     @Override
     public LayoutBuilder addOutput(int index, String identifier, @Nullable WrappedItemStack startValue) {
-        addSlot(new OutputSlotImpl(index, identifier, startValue, null));
-        return this;
+        return addSlot(new OutputSlotImpl(index, identifier, startValue, null));
     }
 
     @Override
