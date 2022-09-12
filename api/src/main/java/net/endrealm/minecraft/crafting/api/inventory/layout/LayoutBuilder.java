@@ -1,5 +1,6 @@
-package net.endrealm.minecraft.crafting.api.station;
+package net.endrealm.minecraft.crafting.api.inventory.layout;
 
+import net.endrealm.minecraft.crafting.api.inventory.layout.types.LayoutSlot;
 import net.endrealm.minecraft.crafting.api.utils.WrappedItemStack;
 import org.jetbrains.annotations.Nullable;
 

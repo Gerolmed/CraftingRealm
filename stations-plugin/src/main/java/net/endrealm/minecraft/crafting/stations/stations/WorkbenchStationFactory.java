@@ -5,7 +5,7 @@ import net.endrealm.minecraft.crafting.api.CraftingPlayer;
 import net.endrealm.minecraft.crafting.api.recipe.RecipeRegistry;
 import net.endrealm.minecraft.crafting.api.station.CraftingStation;
 import net.endrealm.minecraft.crafting.api.station.CraftingStationFactory;
-import net.endrealm.minecraft.crafting.api.station.LayoutBuilder;
+import net.endrealm.minecraft.crafting.api.inventory.layout.LayoutBuilder;
 import net.endrealm.minecraft.crafting.stations.Constants;
 import org.bukkit.Location;
 import org.bukkit.plugin.java.JavaPlugin;

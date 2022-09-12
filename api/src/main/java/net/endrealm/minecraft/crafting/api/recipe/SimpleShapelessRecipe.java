@@ -3,9 +3,8 @@ package net.endrealm.minecraft.crafting.api.recipe;
 import lombok.Data;
 import net.endrealm.minecraft.crafting.api.CraftingPlayer;
 import net.endrealm.minecraft.crafting.api.station.CraftingStation;
-import net.endrealm.minecraft.crafting.api.station.GridLayoutContext;
-import net.endrealm.minecraft.crafting.api.station.InputSlot;
-import net.endrealm.minecraft.crafting.api.station.LayoutContext;
+import net.endrealm.minecraft.crafting.api.inventory.layout.InputSlot;
+import net.endrealm.minecraft.crafting.api.inventory.layout.LayoutContext;
 import net.endrealm.minecraft.crafting.api.utils.WrappedItemStack;
 
 import java.util.*;

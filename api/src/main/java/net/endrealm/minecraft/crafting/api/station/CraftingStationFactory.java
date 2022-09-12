@@ -1,9 +1,9 @@
 package net.endrealm.minecraft.crafting.api.station;
 
 import net.endrealm.minecraft.crafting.api.CraftingPlayer;
+import net.endrealm.minecraft.crafting.api.inventory.layout.LayoutBuilder;
 import net.endrealm.minecraft.crafting.api.recipe.book.RecipeViewData;
 import org.bukkit.Location;
-import org.bukkit.entity.Player;
 import org.jetbrains.annotations.Nullable;
 
 public interface CraftingStationFactory {

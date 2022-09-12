@@ -1,7 +1,6 @@
 package net.endrealm.minecraft.crafting.api.inventory;
 
-import net.endrealm.minecraft.crafting.api.CraftingPlayer;
-import net.endrealm.minecraft.crafting.api.station.Layout;
+import net.endrealm.minecraft.crafting.api.inventory.layout.Layout;
 
 public interface InventorySource {
 

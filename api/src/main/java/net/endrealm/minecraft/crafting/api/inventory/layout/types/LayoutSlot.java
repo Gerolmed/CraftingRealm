@@ -1,4 +1,4 @@
-package net.endrealm.minecraft.crafting.api.station;
+package net.endrealm.minecraft.crafting.api.inventory.layout.types;
 
 import net.endrealm.minecraft.crafting.api.inventory.InventorySource;
 import net.endrealm.minecraft.crafting.api.utils.WrappedItemStack;

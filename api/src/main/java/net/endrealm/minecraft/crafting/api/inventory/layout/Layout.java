@@ -1,7 +1,8 @@
-package net.endrealm.minecraft.crafting.api.station;
+package net.endrealm.minecraft.crafting.api.inventory.layout;
+
+import net.endrealm.minecraft.crafting.api.inventory.layout.types.LayoutSlot;
 
 import java.util.Collection;
-import java.util.List;
 
 public interface Layout {
     Collection<LayoutSlot> getSlots();

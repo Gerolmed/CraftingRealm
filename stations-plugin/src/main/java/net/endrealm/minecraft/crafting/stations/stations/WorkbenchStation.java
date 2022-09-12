@@ -2,6 +2,9 @@ package net.endrealm.minecraft.crafting.stations.stations;
 
 import lombok.Data;
 import net.endrealm.minecraft.crafting.api.CraftingPlayer;
+import net.endrealm.minecraft.crafting.api.inventory.layout.*;
+import net.endrealm.minecraft.crafting.api.inventory.layout.types.GridLayoutContext;
+import net.endrealm.minecraft.crafting.api.inventory.layout.types.OutputSlot;
 import net.endrealm.minecraft.crafting.api.recipe.Recipe;
 import net.endrealm.minecraft.crafting.api.recipe.RecipeRegistry;
 import net.endrealm.minecraft.crafting.api.station.*;

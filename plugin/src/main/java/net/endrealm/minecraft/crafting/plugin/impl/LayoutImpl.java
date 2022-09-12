@@ -1,8 +1,8 @@
 package net.endrealm.minecraft.crafting.plugin.impl;
 
 import lombok.Data;
-import net.endrealm.minecraft.crafting.api.station.Layout;
-import net.endrealm.minecraft.crafting.api.station.LayoutSlot;
+import net.endrealm.minecraft.crafting.api.inventory.layout.Layout;
+import net.endrealm.minecraft.crafting.api.inventory.layout.types.LayoutSlot;
 
 import java.util.Collection;
 import java.util.Map;

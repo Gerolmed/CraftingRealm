@@ -2,10 +2,9 @@ package net.endrealm.minecraft.crafting.api.recipe;
 
 import net.endrealm.minecraft.crafting.api.CraftingPlayer;
 import net.endrealm.minecraft.crafting.api.station.CraftingStation;
-import net.endrealm.minecraft.crafting.api.station.InputSlot;
-import net.endrealm.minecraft.crafting.api.station.LayoutContext;
+import net.endrealm.minecraft.crafting.api.inventory.layout.InputSlot;
+import net.endrealm.minecraft.crafting.api.inventory.layout.LayoutContext;
 import net.endrealm.minecraft.crafting.api.utils.WrappedItemStack;
-import org.bukkit.entity.Player;
 
 import java.util.List;
 import java.util.Map;

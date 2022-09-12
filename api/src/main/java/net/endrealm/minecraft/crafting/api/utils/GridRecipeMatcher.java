@@ -2,8 +2,8 @@ package net.endrealm.minecraft.crafting.api.utils;
 
 import net.endrealm.minecraft.crafting.api.recipe.Recipe;
 import net.endrealm.minecraft.crafting.api.recipe.RecipeRegistry;
-import net.endrealm.minecraft.crafting.api.station.GridLayoutContext;
-import net.endrealm.minecraft.crafting.api.station.InputSlot;
+import net.endrealm.minecraft.crafting.api.inventory.layout.types.GridLayoutContext;
+import net.endrealm.minecraft.crafting.api.inventory.layout.InputSlot;
 
 import java.util.HashMap;
 import java.util.List;
