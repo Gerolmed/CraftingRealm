@@ -73,7 +73,7 @@ repositories {
 
 
 tasks.runServer {
-    minecraftVersion("1.19.2")
+    minecraftVersion("1.20.2")
     javaLauncher.set(javaToolchains.launcherFor {
         languageVersion.set(JavaLanguageVersion.of(17))
     })
